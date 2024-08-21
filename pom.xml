@@ -15,4 +15,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+    </dependencies>
+
 </project>
