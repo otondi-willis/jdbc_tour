@@ -14,7 +14,7 @@ public class CustomerDAO extends DataAccessObject<Customer> {
             "last_name, email, phone, address, city, state, zipcode) VALUES(?,?,?,?,?,?,?,?)";
 
     private static final String GET_ONE = "SELECT customer_id, first_name, last_name" +
-            ",email, phone,address, city, state, zipcode FROM customer WHERE customer_id=?  "
+            ",email, phone,address, city, state, zipcode FROM customer WHERE customer_id=?  ";
     public CustomerDAO(Connection connection) {
         super(connection);
     }
