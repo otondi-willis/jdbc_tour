@@ -35,7 +35,14 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     public Customer create(Customer dto) {
         try (
                 PreparedStatement statement = this.connection.prepareStatement(INSERT);){
-
+statement.setString(1,dto.getFirstName());
+statement.setString(2, dto.getLastName());
+statement.setString(3, dto.getEmail());
+statement.setString(4, dto.getPhone());
+statement.setString(5, dto.getAddress());
+statement.setString(6, dto.getCity());
+statement.setString(7, dto.getState());
+statement.setString(8, dto.getZipCode());
         } catch (SQLException e){
             e.printStackTrace();
             throw new RuntimeException(e);
