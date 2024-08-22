@@ -3,6 +3,8 @@ package org.sajourney.learning_jdbc;
 import org.sajourney.learning_jdbc.util.DataAccessObject;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerDAO extends DataAccessObject<Customer> {
@@ -31,6 +33,13 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     @Override
     public Customer create(Customer dto) {
+        try (
+                PreparedStatement statement = this.connection.prepareStatement(INSERT);){
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
