@@ -22,6 +22,8 @@ public class JDBCExecutor {
             customer.setState("Washington");
             customer.setZipCode("221223");
 
+            customerDAO.create(customer);
+
 
         } catch (SQLException e){
             e.printStackTrace();
