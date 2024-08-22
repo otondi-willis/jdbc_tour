@@ -11,11 +11,8 @@ public class JDBCExecutor {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("localhost", "hplussport", "postgres", "12345");
         try{
             Connection connection = dcm.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT COUNT (*) FROM CUSTOMER");
-            while (resultSet.next()){
-                System.out.println(resultSet.getInt(1));
-            }
+            CustomerDAO customerDAO = new CustomerDAO(connection);
+            Customer customer = new Customer();
 
 
         } catch (SQLException e){
