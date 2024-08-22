@@ -43,11 +43,13 @@ statement.setString(5, dto.getAddress());
 statement.setString(6, dto.getCity());
 statement.setString(7, dto.getState());
 statement.setString(8, dto.getZipCode());
+statement.execute();
+return null;
         } catch (SQLException e){
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        return null;
+
     }
 
     @Override
