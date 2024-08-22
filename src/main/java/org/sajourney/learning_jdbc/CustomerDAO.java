@@ -20,7 +20,17 @@ public class CustomerDAO extends DataAccessObject<Customer> {
 
     @Override
     public Customer findById(long id) {
-        return null;
+
+        Customer customer = new Customer();
+        try(
+               PreparedStatement statement = this.connection.prepareStatement(GET_ONE);
+                ){
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return customer;
     }
 
     @Override
