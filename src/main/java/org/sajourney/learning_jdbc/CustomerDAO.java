@@ -12,6 +12,8 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     private static final String INSERT = "INSERT INTO customer (first_name, " +
             "last_name, email, phone, address, city, state, zipcode) VALUES(?,?,?,?,?,?,?,?)";
 
+    private static final String GET_ONE = "SELECT customer_id, first_name, last_name" +
+            ",email, phone,address, city, state, zipcode FROM customer WHERE customer_id=?  "
     public CustomerDAO(Connection connection) {
         super(connection);
     }
