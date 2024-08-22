@@ -7,6 +7,9 @@ import java.util.List;
 
 public class CustomerDAO extends DataAccessObject<Customer> {
 
+    private static final String INSERT = "INSERT INTO customer (first_name, " +
+            "last_name, email, phone, address, city, state, zipcode) VALUES(?,?,?,?,?,?,?,?)";
+
     public CustomerDAO(Connection connection) {
         super(connection);
     }
