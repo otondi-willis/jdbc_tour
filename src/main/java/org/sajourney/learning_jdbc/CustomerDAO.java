@@ -105,6 +105,16 @@ return this.findById(id);
 
     @Override
     public void delete(long id) {
+        try(
+                PreparedStatement statement = this.connection.prepareStatement(DELETE);
+                ){
+            statement.setLong(1,id);
+            statement.execute();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 
     }
 }
