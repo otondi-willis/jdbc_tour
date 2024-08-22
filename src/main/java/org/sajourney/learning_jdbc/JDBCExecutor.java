@@ -13,6 +13,14 @@ public class JDBCExecutor {
             Connection connection = dcm.getConnection();
             CustomerDAO customerDAO = new CustomerDAO(connection);
             Customer customer = new Customer();
+            customer.setFirstName("George");
+            customer.setLastName("Washington");
+            customer.setEmail("george@gmail.com");
+            customer.setPhone("(555) 555-6453");
+            customer.setAddress("1234 Main St");
+            customer.setCity("Mount Sinai");
+            customer.setState("Washington");
+            customer.setZipCode("221223");
 
 
         } catch (SQLException e){
