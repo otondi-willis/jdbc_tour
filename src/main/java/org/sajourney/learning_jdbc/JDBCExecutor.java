@@ -14,6 +14,11 @@ public class JDBCExecutor {
             Connection connection = dcm.getConnection();
             CustomerDAO customerDAO = new CustomerDAO(connection);
             customerDAO.findAllSorted(20).forEach(System.out::println);
+            System.out.println("Paged");
+            for(int i=1; i<3; i++){
+                System.out.println("Page number: " + i);
+                customerDAO.findAllPaged(10, i).forEach(System.out::println);
+            }
 
 
         } catch (SQLException e){
