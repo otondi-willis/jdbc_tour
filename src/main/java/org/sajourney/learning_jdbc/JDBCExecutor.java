@@ -4,6 +4,7 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class JDBCExecutor {
     public static void main(String[] args){
@@ -11,17 +12,9 @@ public class JDBCExecutor {
         DatabaseConnectionManager dcm = new DatabaseConnectionManager("localhost", "hplussport", "postgres", "12345");
         try{
             Connection connection = dcm.getConnection();
-            CustomerDAO customerDAO = new CustomerDAO(connection);
-            Customer customer = customerDAO.findById(10000);
-            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail());
-
-            customer.setEmail("gwashington@wh.gov");
-            customer = customerDAO.update(customer);
-            System.out.println(customer.getFirstName() + " " + customer.getLastName() + " " + customer.getEmail());
-
-
-            //customerDAO.create(customer);
-
+            OrderDAO orderDAO = new OrderDAO(connection);
+            List<Order> orders = orderDAO.getOrdersForCustomer(789);
+            orders.forEach(System.out::println);
 
         } catch (SQLException e){
             e.printStackTrace();
