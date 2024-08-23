@@ -22,7 +22,8 @@ public class CustomerDAO extends DataAccessObject<Customer> {
     private static final String DELETE = "DELETE FROM customer WHERE customer_id =?";
     private static final String GET_ALL_LMT = "SELECT customer_id, first_name, last_name" +
             ",email, phone,address, city, state, zipcode FROM customer ORDER BY last_name, first_name LIMIT ?";
-
+    private static final String GET_ALL_PAGED = "SELECT customer_id, first_name, last_name" +
+            ",email, phone,address, city, state, zipcode FROM customer ORDER BY last_name, first_name LIMIT ? OFFSET ?";
     public CustomerDAO(Connection connection) {
         super(connection);
     }
@@ -113,6 +114,39 @@ return this.findById(id);
 
                 ){
             statement.setInt(1, limit);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                Customer customer = new Customer();
+                customer.setId(rs.getLong("customer_id"));
+                customer.setFirstName(rs.getString("first_name"));
+                customer.setLastName(rs.getString("last_name"));
+                customer.setEmail(rs.getString("email"));
+                customer.setPhone(rs.getString("phone"));
+                customer.setAddress(rs.getString("address"));
+                customer.setCity(rs.getString("city"));
+                customer.setState(rs.getString("state"));
+                customer.setZipCode(rs.getString("zipcode"));
+                customers.add(customer);
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return customers;
+    }
+    public List<Customer> findAllPaged(int limit, int pageNumber){
+        List<Customer> customers = new ArrayList<>();
+        int offset = ((pageNumber - 1)* limit);
+        try(
+                PreparedStatement statement = this.connection.prepareStatement(GET_ALL_PAGED);
+
+        ){
+            if(limit < 1){
+                limit=10;
+            }
+            statement.setInt(1, limit);
+            statement.setInt(2,offset);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 Customer customer = new Customer();
